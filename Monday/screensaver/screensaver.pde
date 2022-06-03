@@ -1,13 +1,12 @@
 Text t;
-void setup(){
+void setup() {
   size(1920, 1080);
   t = new Text();
 }
 
-void draw(){
+void draw() {
   background(0);
   t.move();
-  
 }
 
 class Text
@@ -19,8 +18,9 @@ class Text
   int yPos;
   int ySpeed;
   int xSpeed;
-  
-  Text(){
+
+
+  Text() {
     fontSize = 64;
     textSize(fontSize);
     xPos = 400;
@@ -29,26 +29,25 @@ class Text
     xSpeed = 2;
     ySpeed = 2;
   }
-  
-  void move(){
+
+  void move() {
     xPos += xSpeed;
     yPos += ySpeed;
-    
-    if(xPos > 1920)
+
+    if (xPos > 1920 - 300)
       xSpeed = -2;
-    
-    else if(xPos < 0)
+
+    else if (xPos < 0)
       xSpeed = 2;
-      
-    if(yPos > 1080)
+
+    if (yPos > 1080 - 250)
       ySpeed = -2;
-    
-    if(yPos < 0)
+
+    if (yPos < 0 )
       ySpeed = 2;
-    
-    println("yPos = " + yPos);
-  
-  text(text, xPos, yPos);
-  
-}
+
+
+
+    text(text, xPos, yPos, 500, 500);
+  }
 }
