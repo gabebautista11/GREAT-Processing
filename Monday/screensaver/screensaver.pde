@@ -1,20 +1,12 @@
-String word;
-int xPos;
-int yPos;
-int xSpeed;
-int ySpeed;
-
+Text t;
 void setup(){
   size(1920, 1080);
-  Text t = new Text();
+  t = new Text();
 }
 
 void draw(){
   background(0);
-  text(word, xPos, yPos);
-  textAlign(CENTER);
-  xPos += xSpeed;
-  yPos += ySpeed;
+  t.move();
   
 }
 
@@ -23,13 +15,14 @@ class Text
   float textSize;
   String text;
   int fontSize;
-  int Xpos;
+  int xPos;
   int yPos;
   int ySpeed;
   int xSpeed;
   
   Text(){
     fontSize = 64;
+    textSize(fontSize);
     xPos = 400;
     yPos = 400;
     text = "Welcome to Processing";
@@ -38,15 +31,24 @@ class Text
   }
   
   void move(){
+    xPos += xSpeed;
+    yPos += ySpeed;
+    
     if(xPos > 1920)
       xSpeed = -2;
     
-    if(xPos < 1920)
+    else if(xPos < 0)
       xSpeed = 2;
       
-    if(yPos > 1080){
+    if(yPos > 1080)
       ySpeed = -2;
-    }
+    
+    if(yPos < 0)
+      ySpeed = 2;
+    
+    println("yPos = " + yPos);
   
+  text(text, xPos, yPos);
   
+}
 }
