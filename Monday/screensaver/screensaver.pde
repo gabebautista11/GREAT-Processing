@@ -26,25 +26,36 @@ class Text
     xPos = 400;
     yPos = 400;
     text = "Welcome to Processing";
-    xSpeed = 2;
-    ySpeed = 2;
+    xSpeed = 200;
+    ySpeed = 200;
   }
 
   void move() {
+    background(random(255), random(255), random(255));
+
     xPos += xSpeed;
     yPos += ySpeed;
 
-    if (xPos > 1920 - 300)
-      xSpeed = -2;
+    if (xPos > 1920 - 300) {
+      fill(random(255), random(255), random(255));
+      xSpeed = -200;
+    } else if (xPos < 0) {
+      fill(random(255), random(255), random(255));
 
-    else if (xPos < 0)
-      xSpeed = 2;
+      xSpeed = 200;
+    }
 
-    if (yPos > 1080 - 250)
-      ySpeed = -2;
+    if (yPos > 1080 - 250) {
+      fill(random(255), random(255), random(255));
 
-    if (yPos < 0 )
-      ySpeed = 2;
+      ySpeed = -200;
+    }
+
+    if (yPos < 0 ) {
+      fill(random(255), random(255), random(255));
+
+      ySpeed = 200;
+    }
 
 
 
