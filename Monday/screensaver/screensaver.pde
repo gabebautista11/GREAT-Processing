@@ -1,4 +1,5 @@
 Text t;
+
 void setup() {
   size(1920, 1080);
   t = new Text();
@@ -18,6 +19,7 @@ class Text
   int yPos;
   int ySpeed;
   int xSpeed;
+  int speed = 4;
 
 
   Text() {
@@ -26,35 +28,42 @@ class Text
     xPos = 400;
     yPos = 400;
     text = "Welcome to Processing";
-    xSpeed = 200;
-    ySpeed = 200;
+    xSpeed = speed;
+    ySpeed = speed;
   }
 
   void move() {
-    background(random(255), random(255), random(255));
 
     xPos += xSpeed;
     yPos += ySpeed;
 
     if (xPos > 1920 - 300) {
       fill(random(255), random(255), random(255));
-      xSpeed = -200;
+      background(random(255), random(255), random(255));
+
+      xSpeed = -speed;
     } else if (xPos < 0) {
       fill(random(255), random(255), random(255));
+      background(random(255), random(255), random(255));
 
-      xSpeed = 200;
+
+      xSpeed = speed;
     }
 
     if (yPos > 1080 - 250) {
       fill(random(255), random(255), random(255));
+      background(random(255), random(255), random(255));
 
-      ySpeed = -200;
+
+      ySpeed = -speed;
     }
 
     if (yPos < 0 ) {
       fill(random(255), random(255), random(255));
+      background(random(255), random(255), random(255));
 
-      ySpeed = 200;
+
+      ySpeed = speed;
     }
 
 
