@@ -39,29 +39,21 @@ class Text
 
     if (xPos > 1920 - 300) {
       fill(random(255), random(255), random(255));
-      background(random(255), random(255), random(255));
-
       xSpeed = -speed;
     } else if (xPos < 0) {
       fill(random(255), random(255), random(255));
-      background(random(255), random(255), random(255));
-
 
       xSpeed = speed;
     }
 
     if (yPos > 1080 - 250) {
       fill(random(255), random(255), random(255));
-      background(random(255), random(255), random(255));
-
 
       ySpeed = -speed;
     }
 
     if (yPos < 0 ) {
       fill(random(255), random(255), random(255));
-      background(random(255), random(255), random(255));
-
 
       ySpeed = speed;
     }
