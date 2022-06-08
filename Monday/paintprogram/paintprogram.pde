@@ -3,6 +3,7 @@ int shapeNumber = 1;
 void setup(){
   size(500,500);
   background(0);
+  noStroke();
 }
 
 void draw(){
@@ -30,7 +31,7 @@ void keyPressed(){
   }
 }
 
-void mousePressed(){
+void mouseDragged(){
   if(shapeNumber == 1){
     ellipse(mouseX, mouseY, 10, 10);
   }
