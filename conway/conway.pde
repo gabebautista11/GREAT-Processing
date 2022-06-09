@@ -1,6 +1,6 @@
 int rows;
 int cols;
-int squareSize = 20;
+int squareSize = 10;
 boolean[][] alive;
 
 boolean simulating;
@@ -9,7 +9,7 @@ color backgroundColor = color(0, 0, 0);
 
 
 void setup() {
-  size(700, 700);
+  size(800, 800);
   background(backgroundColor);
   rows = height / squareSize;
   cols = width / squareSize;
@@ -74,7 +74,21 @@ boolean inBounds(int row, int col) {
 }
 
 void keyPressed() {
-  simulating = !simulating;
+  if (key == 'n') {
+    updateCells();
+  } else if (key == 'c') {
+    alive = new boolean[rows][cols];
+  } else if (key >= '1' && key <= '9') {
+    frameRate(5*(int)(key - '0'));
+  } else if (key == 'r') {
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        alive[row][col] = random(10) > 7 ? true : false;
+      }
+    }
+  } else {
+    simulating = !simulating;
+  }
 }
 
 void mousePressed() {
