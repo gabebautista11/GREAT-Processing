@@ -16,12 +16,6 @@ void setup() {
   alive = new boolean[rows][cols];
   simulating = false;
   frameRate(10);
-  
-  alive[0][0] = true;
-  
-  alive[1][1] = true;
-  alive[0][1] = true;
-  alive[1][0] = true;
 }
 
 void draw() {
@@ -46,11 +40,13 @@ void updateCells() {
     for (int col = 0; col < cols; col++) {
       int count = countNeighbors(row, col);
       if (alive[row][col]) {
-        if (count >= 3 || count == 0) {
+        if (count < 2 || count > 3) {
           temp[row][col] = false;
+        } else {
+          temp[row][col] = true;
         }
       } else {
-        if (count == 2) {
+        if (count == 3) {
           temp[row][col] = true;
         }
       }
@@ -63,7 +59,7 @@ int countNeighbors(int row, int col) {
   int count = 0;
   for (int r = -1; r <= 1; r++) {
     for (int c = -1; c <= 1; c++) {
-      if (inBounds(row + r, col + c)) {
+      if (inBounds(row + r, col + c) && (r != 0 || c != 0)) {
         if (alive[row+r][col+c]) {
           count++;
         }
@@ -77,10 +73,10 @@ boolean inBounds(int row, int col) {
   return (row >= 0) && (row < rows) && (col >= 0) && (col < cols);
 }
 
-void keyPressed(){
+void keyPressed() {
   simulating = !simulating;
 }
 
-void mousePressed(){
+void mousePressed() {
   alive[(int)mouseX/squareSize][(int)mouseY/squareSize] = !alive[(int)mouseX/squareSize][(int)mouseY/squareSize];
 }
