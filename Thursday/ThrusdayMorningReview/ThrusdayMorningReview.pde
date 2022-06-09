@@ -8,10 +8,9 @@ String[] food = {"Pizza", "Ice Cream", "Chicken", "Salad", "Sandwich"};
 
 //what INDEX in the array is Chicken?
 
-//how can I read each food in the area
+//how can I read each food in the array 1 at a time
 
 //how can we loop through each food but only print the 2nd and 5th item in the array
-//what kind of array should we use
 
 
 int foo(int a, int b) //what does this method do?
