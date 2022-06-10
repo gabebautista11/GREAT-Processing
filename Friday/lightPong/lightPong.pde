@@ -5,7 +5,7 @@ int leftX;
 int leftY;
 int rightX;
 int rightY;
-int conuter;
+int counter;
 int ballXVelocity;
 float ballYVelocity;
 int ballX;
@@ -17,7 +17,7 @@ int rightPlayerScore;
 
 void setup() {
   size(640, 480);
-  conuter = 0;
+  counter = 0;
   leftPlayerScore = 0;
   rightPlayerScore = 0;
   ballXVelocity = -1;
@@ -36,8 +36,6 @@ void setup() {
     // The camera can be initialized directly using an
     // element from the array returned by list():
     cam = new Capture(this, cameras[0]);
-
-
     ballX = cam.width / 2;
     ballY = cam.height / 2;
     cam.start();
@@ -51,14 +49,8 @@ void draw() {
     fill(150);
     cam.read();
     cam.loadPixels();
-
-
     scanLeftArea();
-
     scanRightArea();
-
-
-
     cam.updatePixels();
   }
 
@@ -98,7 +90,7 @@ void scanRightArea() {
     for (int index = firstColIndex; index < firstColIndex + 160; index++) {
       if (cam.pixels[index] < color(50, 50, 50)) {
 
-        //println("found black in right area" + conuter++);
+        //println("found black in right area" + counter++);
         rightX = index % cam.width;
         rightY = index / cam.width;
       }
@@ -141,24 +133,23 @@ void collisionDection() {
     ballXVelocity *= -1;
     println("hits left paddle");
   }
-  
-  
-  if(ballX < 0){
-   rightPlayerScore++; 
-   ballX = cam.width / 2;
-  ballY = cam.height / 2;
+
+
+  if (ballX < 0) {
+    rightPlayerScore++;
+    ballX = cam.width / 2;
+    ballY = cam.height / 2;
   }
-  if(ballX > cam.width){
-   leftPlayerScore++; 
-   ballX = cam.width / 2;
-  ballY = cam.height / 2;
+  if (ballX > cam.width) {
+    leftPlayerScore++;
+    ballX = cam.width / 2;
+    ballY = cam.height / 2;
   }
 }
 
-void drawPlayerScore(){
+void drawPlayerScore() {
   textSize(24);
   fill(0);
   text("Player 1: " + leftPlayerScore, 25, 25); //left player
   text("Player 2: " + rightPlayerScore, cam.width - 160, 25); //right player
-  
 }
