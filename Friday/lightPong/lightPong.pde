@@ -7,18 +7,21 @@ int rightX;
 int rightY;
 int conuter;
 int ballXVelocity;
-int ballYVelocity;
+float ballYVelocity;
 int ballX;
 int ballY;
+int leftPlayerScore;
+int rightPlayerScore;
 
 
 
 void setup() {
   size(640, 480);
   conuter = 0;
- 
+  leftPlayerScore = 0;
+  rightPlayerScore = 0;
   ballXVelocity = -1;
-  ballYVelocity = int(random(0,1));
+  ballYVelocity = random(1, 1.5);
   String[] cameras = Capture.list();
 
   if (cameras.length == 0) {
@@ -35,8 +38,8 @@ void setup() {
     cam = new Capture(this, cameras[0]);
 
 
-ballX = cam.width / 2;
-  ballY = cam.height / 2;
+    ballX = cam.width / 2;
+    ballY = cam.height / 2;
     cam.start();
   }
 }
@@ -75,13 +78,14 @@ void draw() {
   collisionDection();
   drawPaddle(rightX);
   drawPaddle(leftX);
+  drawPlayerScore();
 }
 
 
 void scanLeftArea() {
   for (int firstColIndex = 0; firstColIndex < 306560; firstColIndex+=640) { //loops through the left side
     for (int index = firstColIndex; index < firstColIndex + 160; index++) {
-      if (cam.pixels[index] < color(20, 20, 20)) {
+      if (cam.pixels[index] < color(50, 50, 50)) {
         leftX = index % cam.width;
         leftY = index / cam.width;
       }
@@ -92,7 +96,7 @@ void scanLeftArea() {
 void scanRightArea() {
   for (int firstColIndex = cam.width - 160; firstColIndex < 307040; firstColIndex+= cam.width) { //loops through the left side
     for (int index = firstColIndex; index < firstColIndex + 160; index++) {
-      if (cam.pixels[index] < color(20, 20, 20)) {
+      if (cam.pixels[index] < color(50, 50, 50)) {
 
         //println("found black in right area" + conuter++);
         rightX = index % cam.width;
@@ -112,25 +116,49 @@ void drawPaddle(int x) {
   }
 }
 
-void drawBall(){
+void drawBall() {
   ellipse(ballX, ballY, 20, 20);
   ballX += ballXVelocity;
   ballY += ballYVelocity;
 }
 
-void collisionDection(){
-  if(ballX <= 30 && (ballY < leftY && ballY > leftY + 75)) //hits left paddle
+void collisionDection() {
+  if (ballX <= 50 && (ballY > leftY && ballY < leftY + 75)) //hits left paddle
   {
     ballXVelocity *= -1;
-   println("hits left paddle"); 
+    println("hits left paddle");
   }
-  
-  if(ballX >= cam.width - 30 && (ballY < rightY && ballY > rightY + 75)) //hits left paddle
+
+  if (ballY >= cam.height) {
+    ballYVelocity *= -1;
+  }
+  if (ballY <= 0) {
+    ballYVelocity *= -1;
+  }
+
+  if (ballX >= cam.width - 50 && (ballY > rightY && ballY < rightY + 75)) //hits left paddle
   {
     ballXVelocity *= -1;
-   println("hits left paddle"); 
+    println("hits left paddle");
   }
   
   
+  if(ballX < 0){
+   rightPlayerScore++; 
+   ballX = cam.width / 2;
+  ballY = cam.height / 2;
+  }
+  if(ballX > cam.width){
+   leftPlayerScore++; 
+   ballX = cam.width / 2;
+  ballY = cam.height / 2;
+  }
+}
+
+void drawPlayerScore(){
+  textSize(24);
+  fill(0);
+  text("Player 1: " + leftPlayerScore, 25, 25); //left player
+  text("Player 2: " + rightPlayerScore, cam.width - 160, 25); //right player
   
 }
